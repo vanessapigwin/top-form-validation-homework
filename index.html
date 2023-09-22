@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>From Validation Exercise</title>
+</head>
+<body>
+    <form novalidate>
+        Form validation exercise
+        <label class="form-data" for="email">
+            <span>Email</span>
+            <input type="email" name="email" id="email" required>
+            <span class="errormsg"></span>
+        </label>
+        <label class="form-data" for="country">
+            <span>Country</span>
+            <select name="country" id="country" required></select>
+            <span class="errormsg"></span>
+        </label>
+        <label class="form-data" for="zipcode">
+            <span>Zipcode</span>
+            <input type="text" name="zipcode" id="zipcode" required>
+            <span class="errormsg"></span>
+        </label>
+        <label class="form-data" for="password">
+            <span>Password</span>
+            <input type="password" name="password" id="password" required>
+            <span class="errormsg"></span>
+        </label>
+        <label class="form-data" for="passwordcheck">
+            <span>Confirm Password</span>
+            <input type="password" name="passwordcheck" id="passwordcheck" required>
+            <span class="errormsg"></span>
+        </label>
+        <br>
+        <div class="form-data">
+            <button id="Cancel" type="reset">Cancel</button>
+            <button id="Add" type="submit">Add</button>
+        </div>
+    </form>
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    /* border: solid 1px red */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 20px;
+    font-size: 1.2em;
+    width: 400px;
+    border: solid 1px black;
+    padding: 20px;
+}
+
+form > label {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select {
+    height: 2em;
+    border: solid 1px #eee;
+    font-size: 1em;
+}
+
+input:valid, 
+select:valid {
+    border-color: green;
+    background-color: rgba(0, 194, 0, 0.178);
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    
+}
+
+button {
+    flex: 1;
+    font-size: 1em;
+    width: 100px;
+}
+
+.errormsg {
+    line-height: 1.5em;
+    color: rgb(211, 38, 38);;
+    font-size: 0.8em;
+}
