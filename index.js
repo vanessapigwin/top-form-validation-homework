@@ -245,26 +245,105 @@ const countryList = [
 ]
 
 const validateForm = (e) => {
-    let isValid = true;
-    const targets = Array.from(e.target);
-    targets.forEach(target => {
-        if (!target.validity.valid)
-            isValid = false;
-    })
-    if (isValid)
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-    
-    e.preventDefault();
+  let isValid = true;
+  const targets = Array.from(e.target);
+  targets.forEach(target => {
+    const errorMsgArea = target.parentNode.querySelector('.errormsg');
+    if (!target.validity.valid) {
+      isValid = false;
+      errorMsgArea.textContent = target.validationMessage;
+    } else if (target.tagName !== 'BUTTON') {
+      errorMsgArea.textContent = ''
+    }
+  });
+  if (isValid)
+      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+  
+  e.preventDefault();
 }
 
 const checkEmail = (e) => {
-    const text = e.target.value;
-    
+  const text = e.target.value;
+  const errorMsgArea = e.target.parentNode.querySelector('.errormsg');
+  if (text.match(/^([\w\d].*)@([a-z0-9].+)\.([a-z]{2,})$/gi)) {
+    e.target.className = 'valid';
+    e.target.validity = true;
+    e.target.setCustomValidity('');
+    errorMsgArea.textContent = e.target.validationMessage;
+  }
+  else if (text.length >= 1) {
+    e.target.className = 'invalid';
+    e.target.validity = false;
+    e.target.setCustomValidity('Please provide a valid email address');
+  }
+  else {
+    e.target.classList.remove(e.target.className);
+  }
 }
-const checkCountry = () => {}
-const checkZip = () => {}
-const checkpwContent = () => {}
-const checkSamePw = () => {}
+
+const checkCountry = (e) => {
+  const errorMsgArea = e.target.parentNode.querySelector('.errormsg');
+  const text = e.target.value;
+  if (text.length > 0) {
+    e.target.className = 'valid';
+    e.target.validity = true;
+    e.target.setCustomValidity('');
+    errorMsgArea.textContent = e.target.validationMessage;
+  } else {
+    e.target.className = 'invalid';
+  }
+}
+const checkZip = (e) => {
+  const text = e.target.value;
+  const errorMsgArea = e.target.parentNode.querySelector('.errormsg');
+  if (text.match(/^(\d{4,})$/gi)) {
+    e.target.className = 'valid';
+    e.target.validity = true;
+    e.target.setCustomValidity('');
+    errorMsgArea.textContent = e.target.validationMessage;
+  } else if (text.length >= 1) {
+    e.target.className = 'invalid';
+    e.target.validity = false;
+    e.target.setCustomValidity('Zip code must be at least 4 digits');
+  }
+  else {
+    e.target.classList.remove(e.target.className);
+  }
+}
+
+const checkPwContent = (e) => {
+  const text = e.target.value;
+  const errorMsgArea = e.target.parentNode.querySelector('.errormsg');
+  if (text.length >= 7) {
+    e.target.className = 'valid';
+    e.target.validity = true;
+    e.target.setCustomValidity('');
+    errorMsgArea.textContent = e.target.validationMessage;
+  } else if (text.length >= 1) {
+    e.target.className = 'invalid';
+    e.target.validity = false;
+    e.target.setCustomValidity('Password must be at least 7 characters long');
+  }
+  else {
+    e.target.classList.remove(e.target.className);
+  }
+}
+
+const checkSamePw = (e) => {
+  const checkPw = e.target.value;
+  const initPw = document.querySelector('#password').value;
+  const errorMsgArea = e.target.parentNode.querySelector('.errormsg');
+  if (checkPw === initPw) {
+    e.target.className = 'valid';
+    e.target.validity = true;
+    e.target.setCustomValidity('');
+    errorMsgArea.textContent = e.target.validationMessage;
+  } else {
+    e.target.className = 'invalid';
+    e.target.validity = false;
+    e.target.setCustomValidity('Passwords do not match, please try again');
+  }
+}
 
 (() => {
   const form = document.querySelector('form');
@@ -277,7 +356,7 @@ const checkSamePw = () => {}
   email.addEventListener('input', checkEmail);
   country.addEventListener('input', checkCountry);
   zip.addEventListener('input', checkZip);
-  pw.addEventListener('input', checkpwContent);
+  pw.addEventListener('input', checkPwContent);
   pwc.addEventListener('input', checkSamePw);
   
   const noOption = document.createElement('option');
